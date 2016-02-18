@@ -1,8 +1,8 @@
 Package.describe({
-    name: 'frozeman:global-notifications',
+    name: 'sewdn:global-notifications',
     summary: 'Simple global toaster notifications',
-    version: '0.2.1',
-    git: 'http://github.com/frozeman/meteor-global-notifications'
+    version: '0.3.0',
+    git: 'http://github.com/Sewdn/meteor-global-notifications'
 });
 
 Package.onUse(function(api) {
@@ -13,8 +13,7 @@ Package.onUse(function(api) {
     api.use('random', 'client');
     api.use('underscore', 'client');
     api.use('reactive-var', 'client');
-    api.use('frozeman:animation-helper@0.2.3', 'client');
-
+    api.use('velocityjs:velocityjs', 'client');
     api.export(['GlobalNotification','GlobalNotifications']);
 
     api.addFiles('notifications.html', 'client');

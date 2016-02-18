@@ -13,17 +13,16 @@
     z-index: 100;
     position: absolute;
     bottom: @margin;
-    right: @margin;
-
+    left: @margin;
 
     .global-notification {
-        display: inline-block;
-        float: right;
-        clear: right;
+        display: block;
+        position: relative;
+        bottom: 0;
         max-width: 400px;
         padding: @padding*2 @padding*3;
         margin-top: @margin;
-        
+
         &.error {
             background-color: @colorRed;
             color: @colorWhite;
@@ -40,20 +39,6 @@
             color: @colorWhite;
         }
 
-        // ANIMATION
-         -webkit-transition: transform @animationSpeed linear, transform 0.4s 0.2s ease;
-         -moz-transition: transform @animationSpeed linear, transform 0.4s 0.2s ease;
-         -o-transition: transform @animationSpeed linear, transform 0.4s 0.2s ease;
-         transition: transform @animationSpeed linear, transform 0.4s 0.2s ease;
-
-        &.animate {
-            -webkit-transform: translateX(1000px);
-            -moz-transform: translateX(1000px);
-            -ms-transform: translateX(1000px);
-            -o-transform: translateX(1000px);
-            transform: translateX(1000px);
-        }
-
         h1 {
             margin: 0;
             margin-bottom: @margin;
@@ -62,10 +47,25 @@
         p {
             margin: 0;
         }
-        button.ok {
-        }
-        button.cancel {
+        button {
+           -webkit-box-sizing: content-box;
+           -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            background: none;
+            border: 0;
+            color: inherit;
+            /* cursor: default; */
+            font: inherit;
+            line-height: normal;
+            overflow: visible;
+            padding: 0;
+            -webkit-appearance: button; /* for input */
+            -webkit-user-select: none; /* for button */
+            -moz-user-select: none;
+            -ms-user-select: none;
+          &.cancel {
             margin-left: @margin;
+          }
         }
     }
 }

@@ -1,17 +1,15 @@
 <template name="GlobalNotifications">
-    <div class="{{wrapperClass}}">
-        {{#Animate}}
-            {{#each listNotifications}}
-                {{> GlobalNotifications_notification}}
-            {{/each}}
-        {{/Animate}}
-    </div>
+<div class="{{wrapperClass}}">
+    {{#each listNotifications}}
+        {{> GlobalNotifications_notification}}
+    {{/each}}
+</div>
 </template>
 
 
 <template name="GlobalNotifications_notification">
     {{#with notification}}
-        <div class="{{class}} animate {{type}}">
+        <div class="{{class}} {{type}}">
             {{#if title}}
                 <h1>{{title}}</h1>
             {{/if}}

@@ -75,7 +75,7 @@ var addNotification = function(notification, type){
     });
 
     // transform notification
-    if(_.isString(notification))
+    if(_.isString(notification) || _.isFunction(notification))
         notification = {
             type: type,
             content: notification
@@ -130,7 +130,34 @@ The notifications template
 @constructor
 **/
 
-
+Template['GlobalNotifications'].onRendered(function() {
+  var self = this,
+      cc = this.find("." + (this.wrapperClass || 'global-notifications'));
+  if (cc) {
+    cc._uihooks = {
+      insertElement: function(node, next) {
+        $(node).insertBefore(next).velocity({
+          translateY: [0, "100%"]
+        },{
+          easing: [ 200, 20 ],
+          duration: 1000,
+          queue: false
+        });
+      },
+      removeElement: function(node) {
+        $(node).velocity({
+          translateY: ["100%", 0]
+        }, {
+          duration: 300,
+          queue: false,
+          complete: function() {
+            $(node).remove();
+          }
+        });
+      }
+    };
+  }
+});
 
 Template['GlobalNotifications'].helpers({
     /**
@@ -188,11 +215,15 @@ Template['GlobalNotifications_notification'].helpers({
     'notification': function() {
         var template = Template.instance();
 
-        // localize message if TAPi18n is avalable
-        if(this.title && this.title.indexOf('i18n:') !== -1 && typeof TAPi18n !== 'undefined')
-            this.title = TAPi18n.__(this.title.replace('i18n:',''));
-        if(this.content && this.content.indexOf('i18n:') !== -1 && typeof TAPi18n !== 'undefined')
-            this.content = TAPi18n.__(this.content.replace('i18n:',''));
+        //check if title is function
+        if(_.isFunction(this.title)) {
+          this.title = this.title();
+        }
+
+        //check if content is function
+        if(_.isFunction(this.content)) {
+          this.content = this.content();
+        }
 
         // limit the notification visibility duration
         if(_.isFinite(this.duration) && !template._runningTimeout) {
