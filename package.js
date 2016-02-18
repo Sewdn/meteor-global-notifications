@@ -1,7 +1,7 @@
 Package.describe({
     name: 'sewdn:global-notifications',
     summary: 'Simple global toaster notifications',
-    version: '0.3.0',
+    version: '0.3.1',
     git: 'http://github.com/Sewdn/meteor-global-notifications'
 });
 
@@ -13,7 +13,7 @@ Package.onUse(function(api) {
     api.use('random', 'client');
     api.use('underscore', 'client');
     api.use('reactive-var', 'client');
-    api.use('velocityjs:velocityjs', 'client');
+    api.use('velocityjs:velocityjs@1.2.1', 'client');
     api.export(['GlobalNotification','GlobalNotifications']);
 
     api.addFiles('notifications.html', 'client');

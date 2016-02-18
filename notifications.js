@@ -86,6 +86,9 @@ var addNotification = function(notification, type){
     if(!notification.type)
         notification.type = type;
 
+    if(!notification.duration && GlobalNotifications.defaultDuration)
+        notification.duration = GlobalNotifications.defaultDuration;
+
     // make not closeable if an ok or cancel function was passed
     if(_.isUndefined(notification.closeable) && (_.isFunction(notification.ok) || _.isFunction(notification.cancel)))
         notification.closeable = false;
