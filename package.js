@@ -1,7 +1,7 @@
 Package.describe({
     name: 'sewdn:global-notifications',
     summary: 'Simple global toaster notifications',
-    version: '0.3.1',
+    version: '0.3.2',
     git: 'http://github.com/Sewdn/meteor-global-notifications'
 });
 

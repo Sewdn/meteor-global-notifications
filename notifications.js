@@ -89,6 +89,9 @@ var addNotification = function(notification, type){
     if(!notification.duration && GlobalNotifications.defaultDuration)
         notification.duration = GlobalNotifications.defaultDuration;
 
+    if(!notification.position && GlobalNotifications.defaultPosition)
+        notification.position = GlobalNotifications.defaultPosition;
+
     // make not closeable if an ok or cancel function was passed
     if(_.isUndefined(notification.closeable) && (_.isFunction(notification.ok) || _.isFunction(notification.cancel)))
         notification.closeable = false;
@@ -140,7 +143,9 @@ Template['GlobalNotifications'].onRendered(function() {
     cc._uihooks = {
       insertElement: function(node, next) {
         $(node).insertBefore(next).velocity({
-          translateY: [0, "100%"]
+          translateY: [
+            (GlobalNotifications.defaultPosition === 'top' ? "-100%" : 0),
+            (GlobalNotifications.defaultPosition === 'top' ? 0 : "100%")]
         },{
           easing: [ 200, 20 ],
           duration: 1000,
@@ -149,7 +154,10 @@ Template['GlobalNotifications'].onRendered(function() {
       },
       removeElement: function(node) {
         $(node).velocity({
-          translateY: ["100%", 0]
+          translateY: [
+            (GlobalNotifications.defaultPosition === 'top' ? 0 : "100%"),
+            (GlobalNotifications.defaultPosition === 'top' ? "-100%" : 0)
+          ]
         }, {
           duration: 300,
           queue: false,
